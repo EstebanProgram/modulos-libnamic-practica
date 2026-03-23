@@ -2,6 +2,7 @@
 # 1. VISTAS DE UBICACIONES (Location)
 # ============================================
 
+# Vista de tabla para listar ubicaciones
 - model: ui.view
   ext_id: asset_lending_view_location_list
   fields:
@@ -13,12 +14,13 @@
         - { field: id, label: ID, width: 70 }
         - { field: code, label: Código }
         - { field: name, label: Nombre }
-        - { field: is_active, label: Activa, chip: true }
-      actions:
+        - { field: is_active, label: Activa, chip: true } # 'chip: true' le da un formato visual de píldora
+      actions: # Botones de cabecera (Globales)
         - { name: new, type: create, icon: mdi-plus, label: "Agregar" }
         - { name: edit, type: update, icon: mdi-pencil, label: "Modificar" }
         - { name: delete, type: delete, icon: mdi-delete, label: "Eliminar" }
 
+# Vista de formulario para crear/editar ubicaciones
 - model: ui.view
   ext_id: asset_lending_view_location_form
   fields:
@@ -26,7 +28,7 @@
     model_key: asset_lending.location
     type_id.ext_id: ui.ui_view_type_form
     definition:
-      groups:
+      groups: # Organiza los campos en secciones visuales
         - label: "Información Principal"
           fields: [code, name, is_active]
 
@@ -51,7 +53,8 @@
         - { name: new, type: create, icon: mdi-plus, label: "Agregar" }
         - { name: edit, type: update, icon: mdi-pencil, label: "Modificar" }
         - { name: delete, type: delete, icon: mdi-delete, label: "Eliminar" }
-      row_actions:
+      row_actions: # Botones que aparecen en CADA fila de la tabla
+        # Llama a la función 'mark_maintenance' del AssetService
         - key: send_maintenance
           type: service
           label: "Enviar a Mantenimiento"
@@ -59,6 +62,7 @@
           method: mark_maintenance
           model_key: asset_lending.asset
           groups: [asset_lending_group_manager, asset_lending_group_tech, core_group_superadmin]
+        # Llama a la función 'release_maintenance' del AssetService
         - key: release_maintenance
           type: service
           label: "Liberar recurso"
@@ -104,6 +108,7 @@
         - { name: edit, type: update, icon: mdi-pencil, label: "Modificar" }
         - { name: delete, type: delete, icon: mdi-delete, label: "Eliminar" }
       row_actions:
+        # Llama a 'return_asset' del AssetLoanService para cerrar el préstamo
         - key: return_item
           type: service
           label: "Registrar devolución"
