@@ -22,9 +22,6 @@ from app.core.services import exposed_action
 # Importamos las listas para poder coger mas de 1 columana
 from typing import List
 
-# Importo el mnodelo de mi Setting para el cierre automatico
-from ..models import PracticeChecklistSettings
-
 # Importacion de los modelos
 from ..models import PracticeChecklist, PracticeChecklistItem
 
@@ -203,16 +200,8 @@ class PracticeChecklistItemService(BaseService):
         # Confirmar todos los cambios en la base de datos
         self.repo.session.commit()
 
-        # Buscar configuracion del cierre automatico
-        settings = self.repo.session.query(PracticeChecklistSettings).first()
-        if not settings:
-            # Si no existe, crear uno con True
-            settings = PracticeChecklistSettings(auto_close_when_all_done=True)
-            self.repo.session.add(settings)
-            self.repo.session.commit()
-
-        # Cierre automatico si esta habilitado
-        if settings.auto_close_when_all_done:
+        # Cierre automatico usando settings.yml
+        if self.get_setting("practice_checklist.auto_close_when_all_done"):
 
             # Obtener checklist afectados, sin duplicados
             checklist_ids = list({item.checklist_id for item in items})
@@ -224,7 +213,7 @@ class PracticeChecklistItemService(BaseService):
                     self.repo.session.refresh(checklist)
                     # Verificar si todos los items estan hechos
                     all_done = all(ci.is_done for ci in checklist.items)
-                    if all_done:
+                    if all_done and checklist.status != "closed":
                         checklist.status = "closed"
                         checklist.closed_at = dt.datetime.now(dt.timezone.utc)
                         self.repo.session.add(checklist)
