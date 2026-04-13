@@ -1,0 +1,36 @@
+name: Feedback Moderation
+technical_name: feedback_moderation
+version: 1.1.0
+
+category: Moderation
+summary: >
+  Módulo encargado de gestionar el ciclo completo de feedback:
+  creación, revisión, moderación y publicación de comentarios.
+
+dependencies:
+  - core
+  - ui
+
+data:
+  security:
+    - data/groups.yml
+      # Define roles funcionales (moderador, administrador, usuario)
+      # y su impacto en el flujo de moderación
+
+    - data/acl_rules.yml
+      # Controla permisos de acceso en función del estado del feedback
+      # (pendiente, aprobado, rechazado, archivado)
+
+  ui:
+    - data/ui_modules.yml
+      # Registra el módulo en la interfaz y habilita su visibilidad
+      # dentro del panel de administración
+
+  views:
+    - views/views.yml
+      # Contiene formularios y listados para gestionar feedback
+      # (alta, edición, revisión y filtrado)
+
+    - views/menu.yml
+      # Define navegación, accesos rápidos y acciones disponibles
+      # para los distintos perfiles de usuario
