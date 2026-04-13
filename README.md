@@ -143,3 +143,41 @@ Cómo funciona:
 - Al devolverlo (return), vuelve a available
 - También se puede marcar como en mantenimiento
 
+### - Nivel 3: Feedback_moderation
+Sistema de sugerencias con moderación.
+
+Funcionalidad principal:
+- Recepción de sugerencias de usuarios
+- Moderación por parte de administradores
+- Publicación solo de contenido validado
+
+Cómo funciona:
+- Las sugerencias se crean en estado pending
+- Un moderador puede:
+   Publicarlas (published)
+   Rechazarlas (rejected)
+   Fusionarlas con otras (merged)
+- Solo el contenido publicado es visible públicamente
+- Incluye comentarios asociados a cada sugerencia
+
+### - Nivel 4: Community_events
+Gestión completa de eventos para la comunidad.
+
+Funcionalidad principal:
+- Creación y publicación de eventos
+- Gestión de sesiones dentro de eventos
+- Registro de asistentes
+- Control de asistencia (check-in)
+
+Cómo funciona:
+- Los eventos pasan por estados (draft, published, closed, etc.)
+- Los usuarios pueden registrarse a eventos o sesiones
+- El sistema gestiona:
+   Confirmaciones
+   Lista de espera
+   Check-in de asistencia
+
+## Adversidades encontradas
+Durante el desarrollo e integración de los distintos módulos, me he ido encontrando con varios retos. Algunos de estos problemas estaban relacionados con errores en los datos, permisos de acceso y fallos a la hora de crear los tests.
+
+A lo largo del proceso, he tenido que ir resolviendo todos estos obstáculos poco a poco, entendiendo qué estaba fallando, por qué ocurría y cómo solucionarlo. Esto me ha permitido aprender de mis errores y seguir avanzando con el proyecto.
