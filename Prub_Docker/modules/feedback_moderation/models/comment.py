@@ -67,7 +67,7 @@ class Comment(Base):
     # - rejected: rechazado por el moderador
     # Por defecto, todo comentario nuevo se crea como "pending".
     status = field(
-        String(20),
+        String(25),
         required=True,
         public=True,
         editable=True,
@@ -85,7 +85,7 @@ class Comment(Base):
     # Email del autor del comentario.
     # Se utiliza para identificar al autor en entornos públicos sin autenticación.
     author_email = field(
-        String(150),
+        String(100),
         required=False,
         public=True,
         editable=True,

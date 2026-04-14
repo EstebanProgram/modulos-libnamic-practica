@@ -9,10 +9,7 @@ class SuggestionService(BaseService):
     from ..models.suggestion import Suggestion
     from ..models.comment import Comment
 
-    # -------------------------
     # Métodos internos auxiliares
-    # -------------------------
-
     def _get_suggestion(self, id: int):
         """Obtiene una sugerencia o lanza 404 si no existe."""
         record = self.repo.session.get(self.Suggestion, int(id))
@@ -27,10 +24,7 @@ class SuggestionService(BaseService):
         self.repo.session.refresh(record)
         return serialize(record)
 
-    # -------------------------
     # Acciones de moderación
-    # -------------------------
-
     @exposed_action("write", groups=["feedback_group_moderator", "core_group_superadmin"])
     def publish(self, id: int, note: str | None = None, pin: bool = False) -> dict:
         """

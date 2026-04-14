@@ -59,7 +59,7 @@ class Tag(Base):
 
     # Nombre de la etiqueta (lo que ve el usuario).
     name = field(
-        String(100),
+        String(150),
         required=True,
         public=True,
         editable=True,
@@ -79,7 +79,7 @@ class Tag(Base):
     # Color de la etiqueta en formato hexadecimal.
     # Se usa en la UI para mostrar etiquetas con color.
     color = field(
-        String(20),
+        String(50),
         required=False,
         public=True,
         editable=True,

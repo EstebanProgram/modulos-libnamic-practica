@@ -45,7 +45,7 @@ class Suggestion(Base):
     # Título de la sugerencia.
     # Campo obligatorio y visible públicamente.
     title = field(
-        String(180),
+        String(200),
         required=True,
         public=True,
         editable=True,
@@ -69,7 +69,7 @@ class Suggestion(Base):
     # - rejected: rechazada por el moderador
     # - merged: fusionada con otra sugerencia existente
     status = field(
-        String(20),
+        String(25),
         required=True,
         public=True,
         editable=True,
@@ -88,7 +88,7 @@ class Suggestion(Base):
     # Nombre del autor de la sugerencia (usuario público).
     # No es obligatorio porque puede ser anónimo.
     author_name = field(
-        String(100),
+        String(150),
         required=False,
         public=True,
         editable=True,
@@ -98,7 +98,7 @@ class Suggestion(Base):
     # Email del autor de la sugerencia.
     # Se usa para contacto o identificación básica.
     author_email = field(
-        String(150),
+        String(250),
         required=False,
         public=True,
         editable=True,
@@ -117,16 +117,6 @@ class Suggestion(Base):
         info={"label": {"es": "Público", "en": "Public"}},
     )
 
-    # Nota interna del moderador.
-    # Se utiliza para explicar el motivo de rechazo, fusión o publicación.
-    moderation_note = field(
-        Text,
-        required=False,
-        public=True,
-        editable=True,
-        info={"label": {"es": "Nota de moderación", "en": "Moderation Note"}},
-    )
-
     # Fecha de publicación de la sugerencia.
     # Se rellena automáticamente cuando la sugerencia pasa a estado "published".
     published_at = field(
@@ -135,6 +125,16 @@ class Suggestion(Base):
         public=True,
         editable=False,
         info={"label": {"es": "Publicado en", "en": "Published at"}},
+    )
+
+    # Nota interna del moderador.
+    # Se utiliza para explicar el motivo de rechazo, fusión o publicación.
+    moderation_note = field(
+        Text,
+        required=False,
+        public=True,
+        editable=True,
+        info={"label": {"es": "Nota de moderación", "en": "Moderation Note"}},
     )
 
     # Usuario moderador que revisó la sugerencia.
